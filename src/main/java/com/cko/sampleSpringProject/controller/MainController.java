@@ -11,4 +11,13 @@ public class MainController {
         return "login";
     }
 
+    @GetMapping("/")
+    public String showMainPage(){
+        return "mainPage";
+    }
+
+    @GetMapping("/game")
+    public String showMainGame(){
+        return "KrestN";
+    }
 }
