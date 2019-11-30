@@ -1,7 +1,11 @@
 package com.cko.sampleSpringProject.controller;
 
+import com.cko.sampleSpringProject.dao.FilmDAO;
+import com.cko.sampleSpringProject.model.Films;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -28,14 +32,5 @@ public class MainController {
         System.out.println(mood);
         return "test";
 
-    }
-    @GetMapping("/allFilms")
-    public String showFilms(){
-        return "allFilms";
-    }
-
-    @GetMapping("/creatFilm")
-    public String showCreatFilm(){
-        return "creatFilm";
     }
 }

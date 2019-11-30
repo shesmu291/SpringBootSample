@@ -8,6 +8,7 @@ import com.cko.sampleSpringProject.service.AuthorityService;
 import com.cko.sampleSpringProject.service.SMSCService;
 import com.cko.sampleSpringProject.service.UserService;
 
+import com.github.javafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -33,18 +34,24 @@ public class InitData {
     @Autowired
     FilmDAO filmDAO;
 
+    Faker faker = new Faker();
 
     public void initData() {
-
-//        smscSender.send_sms("89775548911","TEST MESSAGE",1, "", "", 0, "", "");
-        Films films = new Films("Rosomaha", 9, 18 );
-        filmDAO.save(films);
+        initFilms();
         initUserAndRoles();
 
 
     }
 
-    private void initUserAndRoles(){
+    public void initFilms() {
+        for (int i = 0; i < 10; i++) {
+            Films films = new Films(faker.superhero().name(), faker.number().numberBetween(0, 10), faker.number().numberBetween(0, 21));
+            filmDAO.save(films);
+        }
+
+    }
+
+    private void initUserAndRoles() {
         Authority adminAuthority = new Authority("ROLE_ADMIN");
         Authority userAuthority = new Authority("ROLE_USER");
         authorityService.insert(adminAuthority);
@@ -52,7 +59,7 @@ public class InitData {
 
         List<Authority> authorities = new ArrayList<Authority>();
         authorities.add(adminAuthority);
-        userService.insert(new User("1@mail.ru",bCryptPasswordEncoder.encode("1"), authorities));
+        userService.insert(new User("1@mail.ru", bCryptPasswordEncoder.encode("1"), authorities));
 
 
     }
