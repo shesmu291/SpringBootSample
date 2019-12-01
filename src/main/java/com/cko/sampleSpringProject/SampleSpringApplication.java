@@ -18,7 +18,7 @@ public class SampleSpringApplication {
     }
 
     //delete "//" to enable init userroles and users to base
-   @Bean(initMethod = "initData")
+//     @Bean(initMethod = "initData") //что бы менялось каждый раз
     public InitData initialData() {
         return new InitData();
     }

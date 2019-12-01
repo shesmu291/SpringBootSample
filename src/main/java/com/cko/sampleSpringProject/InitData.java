@@ -44,7 +44,7 @@ public class InitData {
     }
 
     public void initFilms() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             Films films = new Films(faker.superhero().name(), faker.number().numberBetween(0, 10), faker.number().numberBetween(0, 21));
             filmDAO.save(films);
         }

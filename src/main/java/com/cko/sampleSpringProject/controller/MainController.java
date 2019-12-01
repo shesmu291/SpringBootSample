@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MainController {
@@ -32,5 +33,18 @@ public class MainController {
         System.out.println(mood);
         return "test";
 
+    }
+
+    @Autowired
+    FilmDAO filmDAO;
+
+    @GetMapping("/testT")
+    public ModelAndView showEditFilm(@RequestParam Long id) {
+        ModelAndView modelAndView = new ModelAndView();
+        Films films = filmDAO.findAllById(id);
+        modelAndView.addObject("film",films);
+        modelAndView.setViewName("testT");
+
+        return modelAndView;
     }
 }
