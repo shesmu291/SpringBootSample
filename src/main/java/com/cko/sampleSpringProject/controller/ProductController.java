@@ -60,12 +60,13 @@ public class ProductController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("allProduct");
         List<Product> productList=productDAO.findAll();
-        modelAndView.addObject("product",productList);
+        modelAndView.addObject("products",productList);
 
         return modelAndView;
 
 
     }
+
 
     @GetMapping("/delete")
     public RedirectView deleteProduct(@RequestParam Long id){
