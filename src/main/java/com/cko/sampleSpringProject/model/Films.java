@@ -1,6 +1,6 @@
 package com.cko.sampleSpringProject.model;
 
-import com.sun.javafx.beans.IDProperty;
+//import com.sun.javafx.beans.IDProperty;
 
 import javax.persistence.*;
 
