@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface FilmDAO extends CrudRepository<Films, Long> {
-Films findAllById(Long id);
+Films findFilmById(Long id);
 List<Films> findAll();
 
 }

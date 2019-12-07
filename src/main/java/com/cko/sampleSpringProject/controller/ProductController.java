@@ -21,10 +21,7 @@ public class ProductController {
     @Autowired
     ProductDAO productDAO;
 
-    @GetMapping("/all")
-    public String showProduct() {
-        return "allProduct";
-    }
+
 
     @GetMapping("/creat")
     public String showCreatProduct() {
@@ -34,13 +31,13 @@ public class ProductController {
     @PostMapping("/creat")
     public RedirectView addNewProduct(Product product) {
         productDAO.save(product);
-        return new RedirectView("/all");
+        return new RedirectView("/products/all");
     }
 
     @GetMapping("/edit")
     public ModelAndView showEditProduct(@RequestParam Long id) {
         ModelAndView modelAndView = new ModelAndView();
-        Product product = productDAO.findAllById(id);
+        Product product = productDAO.findProductById(id);
         modelAndView.addObject("product",product);
         modelAndView.setViewName("editProduct");
 
@@ -52,7 +49,7 @@ public class ProductController {
 
         productDAO.save(product);
 
-        return new RedirectView("/all");
+        return new RedirectView("/products/all");
     }
 
     @GetMapping("/all")
@@ -68,10 +65,13 @@ public class ProductController {
     }
 
 
-    @GetMapping("/delete")
+    @GetMapping("/buy")
     public RedirectView deleteProduct(@RequestParam Long id){
-            productDAO.deleteById(id);
-        return new RedirectView("/all");
+        List<Product> productList=productDAO.findAll();
+
+
+
+        return new RedirectView("/products/all");
     }
 
 

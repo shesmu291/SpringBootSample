@@ -5,7 +5,6 @@ import com.cko.sampleSpringProject.model.Films;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -13,22 +12,22 @@ import org.springframework.web.servlet.ModelAndView;
 public class MainController {
 
     @GetMapping("/loginPage")
-    public String showLoginPage(){
+    public String showLoginPage() {
         return "login";
     }
 
     @GetMapping("/")
-    public String showMainPage(){
+    public String showMainPage() {
         return "mainPage";
     }
 
     @GetMapping("/game")
-    public String showMainGame(){
+    public String showMainGame() {
         return "KrestN";
     }
 
     @GetMapping("/test")
-    public String testing(@RequestParam String name, @RequestParam String mood){
+    public String testing(@RequestParam String name, @RequestParam String mood) {
         System.out.println(name);
         System.out.println(mood);
         return "test";
@@ -41,10 +40,15 @@ public class MainController {
     @GetMapping("/testT")
     public ModelAndView showEditFilm(@RequestParam Long id) {
         ModelAndView modelAndView = new ModelAndView();
-        Films films = filmDAO.findAllById(id);
-        modelAndView.addObject("film",films);
+        Films films = filmDAO.findFilmById(id);
+        modelAndView.addObject("film", films);
         modelAndView.setViewName("testT");
 
         return modelAndView;
+    }
+
+    @GetMapping("/test2")
+    public String testing2() {
+        return "test2";
     }
 }

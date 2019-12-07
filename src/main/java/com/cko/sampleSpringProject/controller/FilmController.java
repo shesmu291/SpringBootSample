@@ -41,7 +41,7 @@ public class FilmController {
         ModelAndView modelAndView = new ModelAndView();
 //        Optional<Films> optional = filmDAO.findById(id);
 //        Films films = optional.get(); можно писать так, если не писать об этом в дао
-        Films films = filmDAO.findAllById(id);
+        Films films = filmDAO.findFilmById(id);
         modelAndView.addObject("film",films);
         modelAndView.setViewName("editFilm");
 

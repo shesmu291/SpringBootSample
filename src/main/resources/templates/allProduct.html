@@ -1,7 +1,8 @@
 <!doctype html>
 <!--ctrl+n для поиска класса-->
 
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<!--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -30,9 +31,9 @@
                                 <td>ID</td>
                                 <td>Название</td>
                                 <td>Цена</td>
-                                <td>Количество
-                                    <a th:href="@{'/products/creat?id='}">  <button id="creat" type="button" class="btn btn-primary">Добавить</button></a>
-                                </td>
+                                <td>Количество </td>
+                                <td><a th:href="@{'/products/creat?id='}">  <button id="creat" type="button" class="btn btn-primary">Добавить</button></a>
+
                             </tr>
 
                             <tr th:each="product: ${products}">
@@ -42,8 +43,10 @@
                                 <td th:text="${product.amount}"></td>
 
                                 <td height="50">
-                                    <a th:href="@{'/products/edit?id='+${product.id}}"> <button id="edit" type="button" class="btn btn-primary" >Изменить</button></a>
-                                    <a th:href="@{'/products/delete?id='+${product.id}}"> <button id="delete" type="button" class="btn btn-danger">Удалить</button></a>
+<!--                                    <a th:href="@{'/products/edit?id='+${product.id}}"> <button id="edit" type="button" class="btn btn-primary" >Изменить</button></a>-->
+<!--                                    <a th:href="@{'/products/delete?id='+${product.id}}"> <button id="delete" type="button" class="btn btn-danger">Удалить</button></a>-->
+                                    <span th:if="${product.amount!=0}"><a th:href="@{'/products/delete?id='+${product.id}}"> <button id="delete" type="button" class="btn btn-danger">Купить</button></a></span>
+
                                 </td>
 
 

@@ -59,7 +59,7 @@ public class InitData {
 
     public void initProduct() {
         for (int i = 0; i < 10; i++) {
-            Product product = new Product(faker.commerce().productName(), faker.number().randomDigit(), faker.number().numberBetween(0,100000));
+            Product product = new Product(faker.commerce().productName(), faker.number().numberBetween(0,1000000), faker.number().numberBetween(0,10));
             productDAO.save(product);
         }
 
@@ -73,8 +73,11 @@ public class InitData {
 
         List<Authority> authorities = new ArrayList<Authority>();
         authorities.add(adminAuthority);
-        userService.insert(new User("1@mail.ru", bCryptPasswordEncoder.encode("1"), authorities));
-
+       // for(int i=0; i<10;i++) {
+            userService.insert(new User("1@mail.ru", bCryptPasswordEncoder.encode("1"), authorities));
+        //}
 
     }
+
+
 }
