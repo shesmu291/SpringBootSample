@@ -20,6 +20,7 @@ public class ProductController {
 
     @Autowired
     ProductDAO productDAO;
+    Long qq;
 
 
 
@@ -65,16 +66,46 @@ public class ProductController {
     }
 
 
+//    @GetMapping("/buy")
+//    public RedirectView deleteProduct(@RequestParam Long id){
+//        List<Product> productList=productDAO.findAll();
+//
+//
+//
+//        return new RedirectView("/products/all");
+//    }
     @GetMapping("/buy")
-    public RedirectView deleteProduct(@RequestParam Long id){
-        List<Product> productList=productDAO.findAll();
-
-
-
-        return new RedirectView("/products/all");
+    public ModelAndView ProcBuy(@RequestParam Long id) {
+        ModelAndView modelAndView = new ModelAndView();
+        Product products = productDAO.findProductById(id);
+        qq = products.getId();
+        modelAndView.addObject("product", products);
+        modelAndView.setViewName("Products/ProductPage");
+        return modelAndView;
+    }
+    @PostMapping("/buy")
+    public RedirectView Buy(int count) {
+        Product products = productDAO.findProductById(qq);
+        if (products.getAmount() > count) {
+            products.setAmount(products.getAmount() - count);
+            productDAO.save(products);
+            return new RedirectView("/products/tenQ");
+        } else if (products.getAmount() == count) {
+            productDAO.deleteById(qq);
+            return new RedirectView("/products/tenQ");
+        } else {
+            return new RedirectView("/products/error");
+        }
     }
 
+    @GetMapping("/tenQ")
+    public String tenQ() {
+        return "Products/ProductTenQ";
+    }
 
-
+    @GetMapping("/error")
+    public String error() {
+        return "Products/ProductError";
+    }
 
 }
