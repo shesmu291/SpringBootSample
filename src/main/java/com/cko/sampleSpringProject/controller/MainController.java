@@ -27,11 +27,12 @@ public class MainController {
     }
 
     @GetMapping("/test")
-    public String testing(@RequestParam String name, @RequestParam String mood) {
-        System.out.println(name);
-        System.out.println(mood);
+//    public String testing(@RequestParam String name, @RequestParam String mood) {
+//        System.out.println(name);
+//        System.out.println(mood);
+//        return "test";
+    public String testing() {
         return "test";
-
     }
 
     @Autowired
@@ -42,13 +43,13 @@ public class MainController {
         ModelAndView modelAndView = new ModelAndView();
         Films films = filmDAO.findFilmById(id);
         modelAndView.addObject("film", films);
-        modelAndView.setViewName("testT");
+        modelAndView.setViewName("test");
 
         return modelAndView;
     }
 
     @GetMapping("/test2")
     public String testing2() {
-        return "test2";
+        return "test";
     }
 }

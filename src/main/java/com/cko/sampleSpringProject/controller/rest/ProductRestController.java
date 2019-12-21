@@ -17,7 +17,7 @@ public class ProductRestController {
     ProductDAO productDAO;
 
     @PostMapping("/add")
-    public void addUser(Product product){
+    public void addUser(@RequestBody Product product){
         productDAO.save(product);
 
     }

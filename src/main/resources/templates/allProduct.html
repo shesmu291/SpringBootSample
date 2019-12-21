@@ -7,7 +7,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link href="/css/allFilms.css" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -32,8 +32,8 @@
                                 <td>Название</td>
                                 <td>Цена</td>
                                 <td>Количество </td>
-                              <td><a th:href="@{'/products/creat?id='}">  <button id="creat" type="button" class="btn btn-primary">Добавить</button></a>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Добавить</button>
+<!--                              <td><a th:href="@{'/products/creat?id='}">  <button type="button" data-toggle="modal" data-target="#addModalCenter" class="btn btn-primary">Добавить</button></a>-->
+                                <td> <button type="button" data-toggle="modal" data-target="#addModalCenter" class="btn btn-primary">Добавить</button></td>
 
 <!--                            </tr>-->
 
@@ -53,7 +53,6 @@
 
 <!--                            </tr>-->
                             <tbody id="forAdd">
-
                             </tbody>
 
                         </table>
@@ -64,6 +63,31 @@
     </div>
 </div>
 
+
+<div class="modal fade" id="addModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group input-group-sm mb-3"><div class="input-group-prepend">
+                <span class="input-group-text" id="input-name">Name</span><input  id="name" type="text" placeholder="name"></div></div>
+                <div class="input-group input-group-sm mb-3"><div class="input-group-prepend">
+                <span class="input-group-text" id="input-rating">Price</span><input id="price" type="number" placeholder="price"></div></div>
+                <div class="input-group input-group-sm mb-3"><div class="input-group-prepend">
+                <span class="input-group-text" id="input-age">Amount</span><input id="amount" type="number" placeholder="amount"></div></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="addProduct()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

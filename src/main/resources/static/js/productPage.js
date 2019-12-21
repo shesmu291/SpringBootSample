@@ -1,5 +1,5 @@
 $(function () {
-    alert("loaded");
+   // alert("loaded");
 
     $.ajax({
         url: '/api/product/all',
@@ -15,7 +15,7 @@ $(function () {
                     "<td>" + product[i].amount + "</td>" +
                     "<td>" +
                     "<a class=\"btn btn-info\" onclick=''>Edit</a>" +
-                    "<a class=\"btn btn-danger\" href=\"/products/deleteProduct?id=" + product[i].id+"\">Delete</a>" +
+                    "<a class=\"btn btn-danger\" href=\"/products/buy?id=" + product[i].id+"\">Delete</a>" +
                     "</td>" +
                     "</tr>")
             }
@@ -30,15 +30,30 @@ $(function () {
 })
 
 
-function example(id) {
+function addProduct() {
     //сгенерировать модальное окно
+    var name=$("#name").val();
+    var price=$("#price").val();
+    var amount=$("#amount").val();
+
+    var newProduct={
+        'name':name,
+        'price':price,
+        'amount':amount
+    }
     $.ajax({
-        url: '/api/product/get?id' + id,
-        type: 'get',
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
-        success: function (product) {
         //запихиваем инфу в нужные поля
+        url: '/api/product/add',
+        method: 'post',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(newProduct),
+        success: function () {
+            window.location.replace("/products/all")
+        },
+        error: function (error) {
 
         }
+
+    });
+       
 }
