@@ -1,8 +1,7 @@
 $(function () {
-   // alert("loaded");
 
     $.ajax({
-        url: '/api/product/all',
+        url: '/api/products/all',
         type: 'get',
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
@@ -14,8 +13,8 @@ $(function () {
                     "<td>" + product[i].price + "</td>" +
                     "<td>" + product[i].amount + "</td>" +
                     "<td>" +
-                    "<a class=\"btn btn-info\" onclick=''>Edit</a>" +
-                    "<a class=\"btn btn-danger\" href=\"/products/buy?id=" + product[i].id+"\">Delete</a>" +
+                    "<button class=\"btn btn-info\" data-target=\"#editProduct\" data-toggle=\"modal\" onclick=\"EditProduct("+product[i].id+")\">Edit</button>" +
+                    "<button class=\"btn btn-danger\" data-toggle=\"modal\" data-target=\"#BuyProduct\" onclick=\"BuyProduct("+product[i].id+")\">Buy</button>" +
                     "</td>" +
                     "</tr>")
             }
@@ -27,10 +26,93 @@ $(function () {
     });
 
 
-})
+});
 
+function EditProduct(id) {
+    //сгенерировать модальное окно
 
-function addProduct() {
+    $.ajax({
+        url: '/api/products/get?id='+id,
+        type: 'get',
+        contentType: 'application/json; charset=utf-8',
+       success: function (product) {
+           $("#edit-id").val(product.id);
+           $("#edit-Name").val(product.name);
+           $("#edit-Price").val(product.price);
+           $("#edit-Amount").val(product.amount);
+       }
+    });
+
+}
+function SendEditData() {
+    //сгенерировать модальное окно
+    var id=$("#edit-id").val();
+    var name=$("#edit-Name").val();
+    var price=$("#edit-Price").val();
+    var amount=$("#edit-Amount").val();
+
+    var editProduct={
+        'id': id,
+        'name':name,
+        'price':price,
+        'amount':amount
+    }
+    $.ajax({
+        //запихиваем инфу в нужные поля
+
+        url: '/api/products/add',
+        method: 'post',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(editProduct),
+        success: function () {
+            window.location.replace("/products/all")
+        },
+        error: function (error) {
+
+        }
+
+    });
+
+}
+function BuyProduct(id) {
+    //сгенерировать модальное окно
+
+    $.ajax({
+        url: '/api/products/get?id='+id,
+        type: 'get',
+        contentType: 'application/json; charset=utf-8',
+        success: function (product) {
+            $("#buy-id").val(product.id);
+            $("#buy-amount").val(product.amount);
+        }
+    });
+
+}
+function buyProduct(id) {
+    var id=$("#buy-id").val();
+    var amount=$("#buy-Amount").val();
+
+    var buyProduct={
+        'id': id,
+        'amount':amount-1,
+    }
+    $.ajax({
+        //запихиваем инфу в нужные поля
+
+        url: '/api/products/add',
+        method: 'post',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(buyProduct),
+        success: function () {
+            window.location.replace("/products/all")
+        },
+        error: function (error) {
+
+        }
+
+    });
+}
+function AddProduct() {
     //сгенерировать модальное окно
     var name=$("#name").val();
     var price=$("#price").val();
@@ -43,7 +125,7 @@ function addProduct() {
     }
     $.ajax({
         //запихиваем инфу в нужные поля
-        url: '/api/product/add',
+        url: '/api/products/add',
         method: 'post',
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify(newProduct),
